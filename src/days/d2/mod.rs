@@ -10,10 +10,14 @@ pub fn answer1() -> usize {
 
     for line in lines.filter_map(|str| str.ok()) {
         let mut split = line.split(" ");
-        match split.next() {
-            Some("forward") => horizontal += split.next().unwrap().parse::<usize>().unwrap(),
-            Some("down") => depth += split.next().unwrap().parse::<usize>().unwrap(),
-            Some("up") => depth -= split.next().unwrap().parse::<usize>().unwrap(),
+
+        let command = split.next().unwrap();
+        let x = split.next().unwrap().parse::<usize>().unwrap();
+
+        match command {
+            "forward" => horizontal += x,
+            "down" => depth += x,
+            "up" => depth -= x,
             _ => ()
         };
     }
@@ -31,14 +35,17 @@ pub fn answer2() -> usize {
 
     for line in lines.filter_map(|str| str.ok()) {
         let mut split = line.split(" ");
-        match split.next() {
-            Some("forward") => {
-                let x = split.next().unwrap().parse::<usize>().unwrap();
+
+        let command = split.next().unwrap();
+        let x = split.next().unwrap().parse::<usize>().unwrap();
+
+        match command {
+            "forward" => {
                 horizontal += x;
                 depth += aim * x;
             },
-            Some("down") => aim += split.next().unwrap().parse::<usize>().unwrap(),
-            Some("up") => aim -= split.next().unwrap().parse::<usize>().unwrap(),
+            "down" => aim += x,
+            "up" => aim -= x,
             _ => ()
         };
     }
